@@ -9,12 +9,12 @@ const ToDo = ({ todo, handleToggle }) => {
 	return (
 		<div
 			id={todo.id}
-			key={todo.id + todo.task}
+			key={todo.id + todo.label}
 			name="todo"
 			value={todo.id}
 			onClick={handleClick}
-			className={todo.complete ? "todo strike" : "todo"}>
-			{todo.task}
+			className={todo.done ? "todo strike" : "todo"}>
+			{todo.label}
 		</div>
 	);
 };
