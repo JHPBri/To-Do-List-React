@@ -8,7 +8,7 @@
     "done": true
   }, {
     "id": 3,
-    "task": "Vacuum floor",
+    "label": "Vacuum floor",
     "done": false
   }
 ]

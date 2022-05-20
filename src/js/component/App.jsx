@@ -10,22 +10,38 @@ function App() {
 	const [toDoList, setToDoList] = useState(data);
 
 	useEffect(() => {
-		console.log("use effect ran");
-		console.log(toDoList);
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/jhpbri", {
+			method: "PUT",
+			body: JSON.stringify(toDoList),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((resp) => {
+				return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+			})
+			.then((data) => {
+				//here is were your code should start after the fetch finishes
+				console.log(data); //this will print on the console the exact object received from the server
+			})
+			.catch((error) => {
+				//error handling
+				console.log(error);
+			});
 	}, [toDoList]);
 
 	const handleToggle = (id) => {
-		let mapped = toDoList.map((label) => {
-			return label.id === Number(id)
-				? { ...label, complete: !label.done }
-				: { ...label };
+		const mapped = toDoList.map((todo) => {
+			return todo.id === Number(id)
+				? { ...todo, done: !todo.done }
+				: { ...todo };
 		});
 		setToDoList(mapped);
 	};
 
 	const handleFilter = () => {
-		let filtered = toDoList.filter((label) => {
-			return !label.done;
+		const filtered = toDoList.filter((todo) => {
+			return !todo.done;
 		});
 		setToDoList(filtered);
 	};
